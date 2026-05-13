@@ -1,0 +1,28 @@
+name: blood_donation_app
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  country_code_picker: ^3.4.1
+  carousel_slider: ^5.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - lib/assets/Login-pana.png
+    - lib/assets/otp.jpg
+    - lib/assets/blood_donation.png

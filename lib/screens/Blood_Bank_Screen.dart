@@ -1,0 +1,305 @@
+// // lib/screens/blood_bank_screen.dart
+// import 'package:flutter/material.dart';
+// import '../constants.dart';
+
+// class BloodBankScreen extends StatelessWidget {
+//   static const String routeName = '/blood_bank';
+
+//   const BloodBankScreen({super.key});
+
+//   static const List<Map<String, dynamic>> bloodBanks = [
+//     {
+//       "name": "Sunsari Blood Transfusion Service, BPKIHS",
+//       "location": "Dharan",
+//       "phone": "021525555",
+//     },
+//     {
+//       "name": "NRCS District BTSC, Sunsari",
+//       "location": "Sunsari",
+//       "phone": "9842041647",
+//     },
+//     {
+//       "name": "Morang Regional Blood Transfusion Service",
+//       "location": "Rangeli Road, Biratnagar",
+//       "phone": "021423336",
+//     },
+//     {
+//       "name": "NRCS Regional BTSC,",
+//       "location": "Biratnagar",
+//       "phone": "021523336",
+//     },
+//   ];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: const Color(
+//         0xFFF5F7FA,
+//       ), // Light grey background like prototype
+//       appBar: AppBar(
+//         backgroundColor: AppTheme.primaryColor,
+//         elevation: 0,
+//         leading: IconButton(
+//           icon: const Icon(Icons.arrow_back, color: Colors.white),
+//           onPressed: () => Navigator.pop(context),
+//         ),
+//         title: const Text(
+//           "Blood Banks near you",
+//           style: TextStyle(color: Colors.white, fontSize: 18),
+//         ),
+//         actions: [
+//           IconButton(
+//             icon: const Icon(Icons.search, color: Colors.white),
+//             onPressed: () {},
+//           ),
+//         ],
+//       ),
+//       body: ListView.builder(
+//         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+//         itemCount: bloodBanks.length,
+//         itemBuilder: (context, index) {
+//           final bank = bloodBanks[index];
+//           return Container(
+//             margin: const EdgeInsets.only(bottom: 16),
+//             decoration: BoxDecoration(
+//               color: Colors.white,
+//               borderRadius: BorderRadius.circular(8),
+//               boxShadow: [
+//                 BoxShadow(
+//                   color: Colors.black.withOpacity(0.05),
+//                   blurRadius: 10,
+//                   offset: const Offset(0, 4),
+//                 ),
+//               ],
+//             ),
+//             child: Padding(
+//               padding: const EdgeInsets.all(16),
+//               child: Column(
+//                 children: [
+//                   Row(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Expanded(
+//                         child: Column(
+//                           crossAxisAlignment: CrossAxisAlignment.start,
+//                           children: [
+//                             Text(
+//                               bank["name"],
+//                               style: const TextStyle(
+//                                 fontSize: 15,
+//                                 fontWeight: FontWeight.bold,
+//                                 color: Color(0xFFB71C1C), // Deep red for title
+//                               ),
+//                             ),
+//                             const SizedBox(height: 4),
+//                             Text(
+//                               bank["location"],
+//                               style: TextStyle(
+//                                 fontSize: 13,
+//                                 color: Colors.grey[600],
+//                               ),
+//                             ),
+//                             Text(
+//                               bank["phone"],
+//                               style: TextStyle(
+//                                 fontSize: 13,
+//                                 color: Colors.grey[400],
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                       // Prototype Call Icon with Signal Waves
+//                       const Icon(
+//                         Icons.contact_phone_outlined,
+//                         color: Colors.green,
+//                         size: 30,
+//                       ),
+//                     ],
+//                   ),
+//                   const SizedBox(height: 20),
+//                   // Button centered and width matches prototype
+//                   SizedBox(
+//                     width: 220, // Specific width to match the prototype look
+//                     child: ElevatedButton(
+//                       onPressed: () {},
+//                       style: ElevatedButton.styleFrom(
+//                         backgroundColor: AppTheme.primaryColor,
+//                         padding: const EdgeInsets.symmetric(vertical: 10),
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(4),
+//                         ),
+//                       ),
+//                       child: const Text(
+//                         "SEE ON GOOGLE MAP",
+//                         style: TextStyle(
+//                           color: Colors.white,
+//                           fontSize: 12,
+//                           fontWeight: FontWeight.bold,
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+
+// lib/screens/blood_bank_screen.dart
+import 'package:flutter/material.dart';
+import '../constants.dart'; // Apki constants file
+
+class BloodBankScreen extends StatelessWidget {
+  static const String routeName = '/blood_bank';
+
+  const BloodBankScreen({super.key});
+
+  // dynamic ki jagah String use kiya taake const theek se kaam kare
+  static const List<Map<String, String>> bloodBanks = [
+    {
+      "name": "Sunsari Blood Transfusion Service, BPKIHS",
+      "location": "Dharan",
+      "phone": "021525555",
+    },
+    {
+      "name": "NRCS District BTSC, Sunsari",
+      "location": "Sunsari",
+      "phone": "9842041647",
+    },
+    {
+      "name": "Morang Regional Blood Transfusion Service",
+      "location": "Rangeli Road, Biratnagar",
+      "phone": "021423336",
+    },
+    {
+      "name": "NRCS Regional BTSC,",
+      "location": "Biratnagar",
+      "phone": "021523336",
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(
+        0xFFF5F7FA,
+      ), // Light grey background like prototype
+      appBar: AppBar(
+        backgroundColor: primaryMaroon, // AppTheme ki jagah primaryMaroon
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text(
+          "Blood Banks near you",
+          style: TextStyle(color: Colors.white, fontSize: 18),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search, color: Colors.white),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        itemCount: bloodBanks.length,
+        itemBuilder: (context, index) {
+          final bank = bloodBanks[index];
+          return Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              bank["name"]!, // Null-safety ke liye ! add kiya
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFB71C1C), // Deep red for title
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              bank["location"]!,
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                            Text(
+                              bank["phone"]!,
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.grey[400],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Prototype Call Icon with Signal Waves
+                      const Icon(
+                        Icons.contact_phone_outlined,
+                        color: Colors.green,
+                        size: 30,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  // Button centered and width matches prototype
+                  SizedBox(
+                    width: 220, // Specific width to match the prototype look
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            primaryMaroon, // AppTheme ki jagah primaryMaroon
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                      child: const Text(
+                        "SEE ON GOOGLE MAP",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
