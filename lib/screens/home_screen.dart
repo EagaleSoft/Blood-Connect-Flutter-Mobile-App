@@ -1,55 +1,17 @@
-// import 'package:flutter/material.dart';
-// import '../constants.dart';
-
-// class HomeScreen extends StatelessWidget {
-//   const HomeScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: const Text('Home'), backgroundColor: primaryMaroon),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             const Icon(
-//               Icons.bloodtype_rounded,
-//               size: 100,
-//               color: primaryMaroon,
-//             ),
-//             const SizedBox(height: 20),
-//             const Text(
-//               'Welcome to Blood Connect',
-//               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-//             ),
-//             const SizedBox(height: 30),
-//             ElevatedButton(
-//               onPressed: () {
-//                 Navigator.popUntil(context, (route) => route.isFirst);
-//               },
-//               child: const Text('Logout'),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 // lib/screens/home_screen.dart
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:blood_donation_app/constants.dart';
 
-// Yahan apne constants ko import karein (Path apne hisaab se theek kar lein)
-import '../constants.dart';
-
-// Agar ye files abhi nahi banayin to inko comment kar dein warna errors ayenge.
-import 'Blood_Bank_Screen.dart';
+import 'blood_bank_screen.dart';
 import 'Blood_Request_Screen.dart';
 import 'Ambulance.dart';
-import 'Profile_Screen.dart';
-import 'Blood_Request_Nearby.dart';
+import 'profile_screen.dart';
+import 'blood_request_nearby.dart';
 import 'Find_Volunteer_Screen.dart';
+import 'Blood_Donate_Screen.dart';
+import 'certificate_screen.dart';
+import 'notification_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
@@ -63,8 +25,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
-  // In screens ko error free rakhne ke liye abhi maine list banai hai.
-  // Agar BloodBankScreen wagera nahi bani to yahan Container() laga dein filhal.
   final List<Widget> _screens = [
     const DashboardContent(),
     const BloodBankScreen(),
@@ -78,17 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: _buildDrawer(),
       body: _screens[_currentIndex],
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          color: primaryMaroon,
-        ), // Dark Mehroon Color
+        decoration: BoxDecoration(color: primaryMaroon),
         child: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index) => setState(() => _currentIndex = index),
           selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white60,
-          backgroundColor: primaryMaroon, // Dark Mehroon Theme
+          unselectedItemColor: Colors.white70,
+          backgroundColor: Colors.transparent,
           type: BottomNavigationBarType.fixed,
-          elevation: 10,
+          elevation: 0,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
             BottomNavigationBarItem(
@@ -114,27 +72,21 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.fromLTRB(20, 50, 20, 25),
-            decoration: const BoxDecoration(
-              gradient: splashGradient, // constants.dart ka gradient
-            ),
-            child: const Column(
+            decoration: BoxDecoration(color: primaryMaroon),
+            child: Column(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 45,
                   backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.person,
-                    size: 55,
-                    color: primaryMaroon,
-                  ), // Dark Mehroon
+                  child: Icon(Icons.person, size: 55, color: Color(0xFF6B0000)),
                 ),
-                SizedBox(height: 12),
-                Text(
+                const SizedBox(height: 12),
+                const Text(
                   "Hello,",
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
-                Text(
-                  appName, // constants.dart se
+                const Text(
+                  "Blood Connect",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22,
@@ -156,9 +108,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pop(context);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => const FindVolunteerScreen(),
-                      ),
+                      MaterialPageRoute(builder: (_) => FindVolunteerScreen()),
+                    );
+                  },
+                ),
+                _buildDrawerItem(
+                  Icons.notifications_outlined,
+                  "Notifications",
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => NotificationsScreen()),
+                    );
+                  },
+                ),
+                _buildDrawerItem(
+                  Icons.card_giftcard,
+                  "My Certificate",
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => CertificateScreen()),
                     );
                   },
                 ),
@@ -173,6 +145,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 _buildDrawerItem(Icons.info_outline, "About App"),
                 _buildDrawerItem(Icons.feedback_outlined, "Help/Feedback"),
+                const SizedBox(height: 12),
+                ListTile(
+                  leading: const Icon(Icons.logout, color: primaryMaroon),
+                  title: const Text(
+                    'Logout',
+                    style: TextStyle(
+                      color: primaryMaroon,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onTap: () {
+                    // Replace with your login route
+                    Navigator.of(
+                      context,
+                    ).pushNamedAndRemoveUntil('/login', (route) => false);
+                  },
+                ),
               ],
             ),
           ),
@@ -224,10 +213,11 @@ class _DashboardContentState extends State<DashboardContent> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          appName,
+          "BLOOD CONNECT",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
-        backgroundColor: primaryMaroon, // Dark Mehroon theme
+        backgroundColor: primaryMaroon,
+        foregroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.menu, color: Colors.white),
@@ -243,9 +233,7 @@ class _DashboardContentState extends State<DashboardContent> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => const BloodRequestsNearbyScreen(),
-                ),
+                MaterialPageRoute(builder: (_) => BloodRequestsNearbyScreen()),
               );
             },
           ),
@@ -275,11 +263,7 @@ class _DashboardContentState extends State<DashboardContent> {
                       width: double.infinity,
                       errorBuilder: (context, error, stackTrace) => Container(
                         color: Colors.grey[300],
-                        child: const Icon(
-                          Icons.broken_image,
-                          size: 60,
-                          color: Colors.grey,
-                        ),
+                        child: const Icon(Icons.broken_image, size: 60),
                       ),
                     );
                   },
@@ -296,8 +280,8 @@ class _DashboardContentState extends State<DashboardContent> {
                         height: 8,
                         decoration: BoxDecoration(
                           color: _carouselIndex == index
-                              ? primaryMaroon
-                              : Colors.white.withOpacity(0.8),
+                              ? Colors.white
+                              : Colors.white.withOpacity(0.6),
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -322,23 +306,42 @@ class _DashboardContentState extends State<DashboardContent> {
                   _buildServiceCard(
                     title: "Blood Donate",
                     icon: Icons.favorite,
-                    onTap: () {},
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const BloodDonateScreen(),
+                      ),
+                    ),
                   ),
                   _buildServiceCard(
                     title: "Blood Bank",
                     icon: Icons.local_hospital,
-                    onTap: () => _navigateWithoutBack(const BloodBankScreen()),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const BloodBankScreen(),
+                      ),
+                    ),
                   ),
                   _buildServiceCard(
                     title: "Blood Request",
                     icon: Icons.message,
-                    onTap: () =>
-                        _navigateWithoutBack(const BloodRequestScreen()),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const BloodRequestScreen(),
+                      ),
+                    ),
                   ),
                   _buildServiceCard(
                     title: "Ambulance",
                     icon: Icons.emergency,
-                    onTap: () => _navigateWithoutBack(const AmbulanceScreen()),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const AmbulanceScreen(),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -350,10 +353,6 @@ class _DashboardContentState extends State<DashboardContent> {
     );
   }
 
-  void _navigateWithoutBack(Widget screen) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => screen));
-  }
-
   Widget _buildServiceCard({
     required String title,
     required IconData icon,
@@ -363,12 +362,11 @@ class _DashboardContentState extends State<DashboardContent> {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          gradient:
-              splashGradient, // constants.dart wala gradient lagaya for premium look
+          color: primaryMaroon,
           borderRadius: BorderRadius.circular(18),
           boxShadow: [
             BoxShadow(
-              color: primaryMaroon.withOpacity(0.3),
+              color: Colors.black.withOpacity(0.12),
               blurRadius: 10,
               offset: const Offset(0, 5),
             ),
