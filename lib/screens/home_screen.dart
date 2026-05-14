@@ -3,15 +3,16 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donation_app/constants.dart';
 
-import 'blood_bank_screen.dart';
-import 'Blood_Request_Screen.dart';
 import 'Ambulance.dart';
+import 'blood_bank_screen.dart';
+import 'blood_request_screen.dart';
 import 'profile_screen.dart';
-import 'blood_request_nearby.dart';
-import 'Find_Volunteer_Screen.dart';
 import 'Blood_Donate_Screen.dart';
-import 'certificate_screen.dart';
-import 'notification_screen.dart';
+import 'Blood_Request_Nearby.dart';
+import 'Find_Volunteer_Screen.dart';
+import 'Notification_Screen.dart';
+import 'Search_Screen.dart';
+import 'Certificate_Screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
@@ -26,39 +27,47 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    const DashboardContent(),
-    const BloodBankScreen(),
-    const BloodRequestScreen(),
-    const ProfileTabContent(),
+    const DashboardContent(),     
+    const SearchScreen(),         
+    const BloodRequestScreen(),   
+    const ProfileTabContent(),       
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: _buildDrawer(),
-      body: _screens[_currentIndex],
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(color: primaryMaroon),
-        child: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: (index) => setState(() => _currentIndex = index),
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white70,
-          backgroundColor: Colors.transparent,
-          type: BottomNavigationBarType.fixed,
-          elevation: 0,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.location_on),
-              label: "Blood Bank",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.bloodtype),
-              label: "Blood Request",
-            ),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-          ],
+    return WillPopScope(
+      onWillPop: () async {
+        if (_currentIndex != 0) {
+          setState(() => _currentIndex = 0);
+          return false;
+        }
+        return true;
+      },
+      child: Scaffold(
+        drawer: _buildDrawer(),
+        body: _screens[_currentIndex],
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: primaryMaroon,
+            boxShadow: [
+              BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10),
+            ],
+          ),
+          child: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: (index) => setState(() => _currentIndex = index),
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.white70,
+            backgroundColor: Colors.transparent,
+            type: BottomNavigationBarType.fixed,
+            elevation: 0,
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+              BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+              BottomNavigationBarItem(icon: Icon(Icons.bloodtype), label: "Request"),
+              BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+            ],
+          ),
         ),
       ),
     );
@@ -81,18 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Icon(Icons.person, size: 55, color: Color(0xFF6B0000)),
                 ),
                 const SizedBox(height: 12),
-                const Text(
-                  "Hello,",
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-                const Text(
-                  "Blood Connect",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                const Text("Hello,", style: TextStyle(color: Colors.white, fontSize: 18)),
+                const Text("Blood Connect", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
               ],
             ),
           ),
@@ -106,10 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   "Find Volunteer",
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => FindVolunteerScreen()),
-                    );
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const FindVolunteerScreen()));
                   },
                 ),
                 _buildDrawerItem(
@@ -117,10 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   "Notifications",
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => NotificationsScreen()),
-                    );
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const NotificationsScreen()));
                   },
                 ),
                 _buildDrawerItem(
@@ -128,10 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   "My Certificate",
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => CertificateScreen()),
-                    );
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const CertificateScreen()));
                   },
                 ),
                 _buildDrawerItem(Icons.contact_mail_outlined, "Contact Us"),
@@ -139,27 +129,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 _buildDrawerItem(Icons.share_outlined, "Share App"),
                 _buildDrawerItem(Icons.star_border, "Rate Us"),
                 _buildDrawerItem(Icons.privacy_tip_outlined, "Privacy Policy"),
-                _buildDrawerItem(
-                  Icons.description_outlined,
-                  "License Agreement",
-                ),
+                _buildDrawerItem(Icons.description_outlined, "License Agreement"),
                 _buildDrawerItem(Icons.info_outline, "About App"),
                 _buildDrawerItem(Icons.feedback_outlined, "Help/Feedback"),
-                const SizedBox(height: 12),
+
+                const Divider(),
                 ListTile(
                   leading: const Icon(Icons.logout, color: primaryMaroon),
                   title: const Text(
                     'Logout',
-                    style: TextStyle(
-                      color: primaryMaroon,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(color: primaryMaroon, fontWeight: FontWeight.bold),
                   ),
                   onTap: () {
-                    // Replace with your login route
-                    Navigator.of(
-                      context,
-                    ).pushNamedAndRemoveUntil('/login', (route) => false);
+                    Navigator.pop(context);
+                    Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
                   },
                 ),
               ],
@@ -220,20 +203,16 @@ class _DashboardContentState extends State<DashboardContent> {
         foregroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.white),
+          icon: const Icon(Icons.menu),
           onPressed: () => Scaffold.of(context).openDrawer(),
         ),
         actions: [
           IconButton(
-            icon: const Icon(
-              Icons.remove_red_eye_outlined,
-              color: Colors.white,
-              size: 28,
-            ),
+            icon: const Icon(Icons.remove_red_eye_outlined, color: Colors.white, size: 28),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => BloodRequestsNearbyScreen()),
+                MaterialPageRoute(builder: (_) =>  BloodRequestsNearbyScreen()),
               );
             },
           ),
@@ -279,9 +258,7 @@ class _DashboardContentState extends State<DashboardContent> {
                         width: _carouselIndex == index ? 22 : 8,
                         height: 8,
                         decoration: BoxDecoration(
-                          color: _carouselIndex == index
-                              ? Colors.white
-                              : Colors.white.withOpacity(0.6),
+                          color: _carouselIndex == index ? Colors.white : Colors.white.withOpacity(0.6),
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -303,46 +280,10 @@ class _DashboardContentState extends State<DashboardContent> {
                 mainAxisSpacing: 16,
                 childAspectRatio: 1.08,
                 children: [
-                  _buildServiceCard(
-                    title: "Blood Donate",
-                    icon: Icons.favorite,
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const BloodDonateScreen(),
-                      ),
-                    ),
-                  ),
-                  _buildServiceCard(
-                    title: "Blood Bank",
-                    icon: Icons.local_hospital,
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const BloodBankScreen(),
-                      ),
-                    ),
-                  ),
-                  _buildServiceCard(
-                    title: "Blood Request",
-                    icon: Icons.message,
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const BloodRequestScreen(),
-                      ),
-                    ),
-                  ),
-                  _buildServiceCard(
-                    title: "Ambulance",
-                    icon: Icons.emergency,
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const AmbulanceScreen(),
-                      ),
-                    ),
-                  ),
+                  _buildServiceCard(title: "Blood Donate", icon: Icons.favorite, onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const BloodDonateScreen()))),
+                  _buildServiceCard(title: "Blood Bank", icon: Icons.local_hospital, onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const BloodBankScreen()))),
+                  _buildServiceCard(title: "Blood Request", icon: Icons.message, onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const BloodRequestScreen()))),
+                  _buildServiceCard(title: "Ambulance", icon: Icons.emergency, onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AmbulanceScreen()))),
                 ],
               ),
             ),
@@ -364,28 +305,14 @@ class _DashboardContentState extends State<DashboardContent> {
         decoration: BoxDecoration(
           color: primaryMaroon,
           borderRadius: BorderRadius.circular(18),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.12),
-              blurRadius: 10,
-              offset: const Offset(0, 5),
-            ),
-          ],
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.12), blurRadius: 10, offset: const Offset(0, 5))],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, size: 50, color: Colors.white),
             const SizedBox(height: 12),
-            Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16), textAlign: TextAlign.center),
           ],
         ),
       ),

@@ -10,34 +10,34 @@ class AmbulanceScreen extends StatelessWidget {
   // dynamic ki jagah String use kiya taake const theek se kaam kare
   static const List<Map<String, String>> ambulanceList = [
     {
-      "name": "BELTAR AMBULANCE",
-      "address": "Beltar, Udayapur",
-      "phone": "9841234567",
+      "name": "KARACHI AMBULANCE",
+      "address": "Gulshan-e-Iqbal, Karachi",
+      "phone": "03001234567",
     },
     {
-      "name": "DHARAN AMBULANCE",
-      "address": "Dharan, Sunsari",
-      "phone": "9851034567",
+      "name": "LAHORE AMBULANCE",
+      "address": "Wapda Town, Lahore",
+      "phone": "03211223344",
     },
     {
-      "name": "BIRATNAGAR AMBULANCE",
-      "address": "Biratnagar, Morang",
-      "phone": "9842034567",
+      "name": "ISLAMABAD AMBULANCE",
+      "address": "Sector F-8, Islamabad",
+      "phone": "03331234567",
     },
     {
-      "name": "LAHAN AMBULANCE",
-      "address": "Lahan, Siraha",
-      "phone": "9865234567",
+      "name": "RAWALPINDI AMBULANCE",
+      "address": "Satellite Town, Rawalpindi",
+      "phone": "03111234567",
     },
     {
-      "name": "GAURADAH AMBULANCE",
-      "address": "Gauradah, Jhapa",
-      "phone": "9841534567",
+      "name": "FAISALABAD AMBULANCE",
+      "address": "Madina Town, Faisalabad",
+      "phone": "04111222333",
     },
     {
-      "name": "DAMAK AMBULANCE",
-      "address": "Damak, Jhapa",
-      "phone": "9815234567",
+      "name": "MULTAN AMBULANCE",
+      "address": "Cantonment, Multan",
+      "phone": "06111222233",
     },
   ];
 
@@ -45,8 +45,8 @@ class AmbulanceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: primaryMaroon, 
-        iconTheme: const IconThemeData(color: whiteColor), 
+        backgroundColor: primaryMaroon,
+        iconTheme: const IconThemeData(color: whiteColor),
         title: const Text(
           "Nearest Ambulance",
           style: TextStyle(
@@ -81,22 +81,6 @@ class AmbulanceScreen extends StatelessWidget {
               child: Row(
                 children: [
                   // Ambulance Icon
-                  Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      color: primaryMaroon.withOpacity(
-                        0.1,
-                      ), // AppTheme ki jagah primaryMaroon
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Icon(
-                      Icons.local_hospital,
-                      color: primaryMaroon, 
-                      size: 28,
-                    ),
-                  ),
-
                   const SizedBox(width: 16),
 
                   // Details
@@ -134,7 +118,6 @@ class AmbulanceScreen extends StatelessWidget {
                           duration: const Duration(seconds: 2),
                         ),
                       );
-                      
                     },
                     child: Container(
                       padding: const EdgeInsets.all(12),

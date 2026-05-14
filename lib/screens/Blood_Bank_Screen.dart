@@ -7,38 +7,35 @@ class BloodBankScreen extends StatelessWidget {
 
   const BloodBankScreen({super.key});
 
-  
   static const List<Map<String, String>> bloodBanks = [
     {
-      "name": "Sunsari Blood Transfusion Service, BPKIHS",
-      "location": "Dharan",
-      "phone": "021525555",
+      "name": "Punjab Institute of Blood Transfusion Service",
+      "location": "Lahore (Shahrah-e-Quaid-e-Azam)",
+      "phone": "04211122233",
     },
     {
-      "name": "NRCS District BTSC, Sunsari",
-      "location": "Sunsari",
-      "phone": "9842041647",
+      "name": "Pakistan Red Crescent Blood Center",
+      "location": "Karachi (Clifton)",
+      "phone": "02111144455",
     },
     {
-      "name": "Morang Regional Blood Transfusion Service",
-      "location": "Rangeli Road, Biratnagar",
-      "phone": "021423336",
+      "name": "Islamabad Blood Bank & Transfusion Unit",
+      "location": "Sector G-8, Islamabad",
+      "phone": "05111133344",
     },
     {
-      "name": "NRCS Regional BTSC,",
-      "location": "Biratnagar",
-      "phone": "021523336",
+      "name": "Faisalabad Regional Blood Transfusion Centre",
+      "location": "Madina Town, Faisalabad",
+      "phone": "04111155566",
     },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(
-        0xFFF5F7FA,
-      ), 
+      backgroundColor: const Color(0xFFF5F7FA),
       appBar: AppBar(
-        backgroundColor: primaryMaroon, 
+        backgroundColor: primaryMaroon,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),

@@ -319,7 +319,7 @@ class _BloodRequestScreenState extends State<BloodRequestScreen> {
               TextFormField(
                 controller: locationController,
                 decoration: _inputDecoration(
-                  hint: "Dharan, Sunsari, Koshi Province",
+                  hint: "Lahore, Punjab, Pakistan",
                   suffixIcon: const Icon(Icons.location_pin, color: Colors.red),
                 ),
                 validator: (value) => value!.isEmpty ? "Required" : null,
