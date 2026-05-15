@@ -8,11 +8,13 @@ import 'blood_bank_screen.dart';
 import 'blood_request_screen.dart';
 import 'profile_screen.dart';
 import 'Blood_Donate_Screen.dart';
-import 'Blood_Request_Nearby.dart';
+import 'Public_Request_Nearby.dart';
 import 'Find_Volunteer_Screen.dart';
 import 'Notification_Screen.dart';
 import 'Search_Screen.dart';
 import 'Certificate_Screen.dart';
+import 'Forget_Password.dart';
+import 'Sos.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
@@ -109,6 +111,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 _buildDrawerItem(
+                Icons.emergency,
+                "Emergency SOS",
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SOSScreen()));
+                },
+              ),
+                _buildDrawerItem(
                   Icons.notifications_outlined,
                   "Notifications",
                   onTap: () {
@@ -199,6 +209,7 @@ class _DashboardContentState extends State<DashboardContent> {
           "BLOOD CONNECT",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
+        centerTitle: true,
         backgroundColor: primaryMaroon,
         foregroundColor: Colors.white,
         elevation: 0,
