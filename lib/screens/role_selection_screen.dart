@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
+import '../routes.dart';
 
 class RoleSelectionScreen extends StatefulWidget {
   const RoleSelectionScreen({super.key});
@@ -20,10 +21,9 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
       duration: const Duration(milliseconds: 1200),
       vsync: this,
     );
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
     _controller.forward();
   }
 
@@ -56,11 +56,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: whiteColor,
-                          size: 20,
-                        ),
+                        icon: const Icon(Icons.arrow_back_ios_new_rounded, color: whiteColor, size: 20),
                         onPressed: () => Navigator.pop(context),
                       ),
                     ),
@@ -72,11 +68,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
-                        Icons.bloodtype_rounded,
-                        color: whiteColor,
-                        size: 42,
-                      ),
+                      const Icon(Icons.bloodtype_rounded, color: whiteColor, size: 42),
                       const SizedBox(width: 12),
                       const Text(
                         appName,
@@ -93,45 +85,45 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                   const SizedBox(height: 8),
                   const Text(
                     continueAs,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: whiteColor70,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: TextStyle(fontSize: 20, color: whiteColor70, fontWeight: FontWeight.w500),
                   ),
 
                   const SizedBox(height: 50),
 
-                  // Role Cards - Centered
+                  // Role Cards
                   Expanded(
                     child: Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // Role Card 1
+                          // Donor
                           _buildRoleCard(
                             icon: Icons.person_outline_rounded,
                             title: donor,
                             subtitle: donorDesc,
                             color: primaryMaroon,
                             delay: 200,
-                            onTap: () => Navigator.of(
+                            onTap: () => Navigator.pushNamed(
                               context,
-                            ).pushNamed('/login', arguments: 'Donor'),
+                              AppRoutes.login,
+                              arguments: 'Donor',
+                            ),
                           ),
 
                           const SizedBox(height: 20),
 
-                          // Role Card 2
+                          // Volunteer → Also goes to Login Screen
                           _buildRoleCard(
                             icon: Icons.groups_rounded,
                             title: volunteer,
                             subtitle: volunteerDesc,
                             color: const Color(0xFF9F1D1D),
                             delay: 400,
-                            onTap: () => Navigator.of(
+                            onTap: () => Navigator.pushNamed(
                               context,
-                            ).pushNamed('/login', arguments: 'Volunteer'),
+                              AppRoutes.login,
+                              arguments: 'Volunteer',   // ← Changed to Login
+                            ),
                           ),
                         ],
                       ),
@@ -182,13 +174,8 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
               child: InkWell(
                 onTap: onTap,
                 borderRadius: BorderRadius.circular(24),
-                splashColor: color.withOpacity(0.1),
-                highlightColor: color.withOpacity(0.05),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 22,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
                   child: Row(
                     children: [
                       Container(
@@ -196,10 +183,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                         width: 60,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [
-                              color.withOpacity(0.15),
-                              color.withOpacity(0.05),
-                            ],
+                            colors: [color.withOpacity(0.15), color.withOpacity(0.05)],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
@@ -218,17 +202,12 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 fontSize: 19,
                                 fontWeight: FontWeight.w800,
                                 color: Colors.black87,
-                                letterSpacing: 0.3,
                               ),
                             ),
                             const SizedBox(height: 6),
                             Text(
                               subtitle,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey[600],
-                                height: 1.3,
-                              ),
+                              style: TextStyle(fontSize: 14, color: Colors.grey[600], height: 1.3),
                             ),
                           ],
                         ),
@@ -239,11 +218,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                           color: color.withOpacity(0.08),
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: color,
-                          size: 16,
-                        ),
+                        child: Icon(Icons.arrow_forward_ios_rounded, color: color, size: 16),
                       ),
                     ],
                   ),

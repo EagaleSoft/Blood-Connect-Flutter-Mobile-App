@@ -1,7 +1,7 @@
 // main.dart
 import 'package:flutter/material.dart';
 import 'constants.dart';
-import 'routes.dart'; 
+import 'routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,9 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: primaryMaroon,
         useMaterial3: true,
-        // ... (your existing theme code)
+        // ... your existing theme code
       ),
-      // 👇 ADD THESE TWO LINES
       initialRoute: AppRoutes.splash,
       onGenerateRoute: AppRoutes.generateRoute,
     );
