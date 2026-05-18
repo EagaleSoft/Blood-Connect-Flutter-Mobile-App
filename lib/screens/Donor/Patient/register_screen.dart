@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
-import '../routes.dart'; // <--- Ye import zaroori hai navigation ke liye
+import '../../../constants.dart';
+import '../../../routes.dart'; // <--- Ye import zaroori hai navigation ke liye
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});

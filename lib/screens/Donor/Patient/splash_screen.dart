@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'role_selection_screen.dart';
-import '../constants.dart';
+import '../../../constants.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

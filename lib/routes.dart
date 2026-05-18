@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'screens/splash_screen.dart';
-import 'screens/role_selection_screen.dart';
-import 'screens/login_screen.dart';
-import 'screens/home_screen.dart';
-import 'screens/register_screen.dart';
-import 'screens/phonelogin_screen.dart';
-import 'screens/otp_screen.dart';
+import 'screens/Donor/Patient/splash_screen.dart';
+import 'screens/Donor/Patient/role_selection_screen.dart';
+import 'screens/Donor/Patient/login_screen.dart';
+import 'screens/Donor/Patient/home_screen.dart';
+import 'screens/Donor/Patient/register_screen.dart';
+import 'screens/Donor/Patient/phonelogin_screen.dart';
+import 'screens/Donor/Patient/otp_screen.dart';
 import 'screens/Volunteer/Volunteer_Dashboard.dart';
+import 'screens/Volunteer/Blood_Request_Management_Screen.dart';
+import 'screens/Volunteer/Donor_Data_Screen.dart';
+import 'screens/Volunteer/Certificate_Generation_Screen.dart';
+import 'screens/Volunteer/Volunteer_Profile_Screen.dart';
+import 'screens/Volunteer/Help_Support_Page.dart';
 
 class AppRoutes {
   // 🛣️ ROUTE NAMES
@@ -18,6 +23,12 @@ class AppRoutes {
   static const String phoneLogin = '/phone-login';
   static const String otp = '/otp';
   static const String volunteerDashboard = '/volunteer_dashboard';
+  static const String bloodRequestManagement = '/blood-request-management';
+  static const String donorData = '/donor-data';
+  static const String certificateGeneration = '/certificate-generation';
+  static const String volunteerProfile = '/volunteer-profile';
+  static const String volunteerSettings = '/volunteer-settings';
+  static const String helpSupport = '/help-support';
 
   // 🗺️ ROUTE GENERATOR
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -52,6 +63,35 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (_) => OtpScreen(phoneNumber: phoneNumber),
         );
+
+      case volunteerDashboard:
+        return MaterialPageRoute(
+          builder: (_) => const VolunteerDashboardScreen(),
+        );
+
+      case bloodRequestManagement:
+        return MaterialPageRoute(
+          builder: (_) => const BloodRequestManagementScreen(),
+        );
+
+      case donorData:
+        return MaterialPageRoute(builder: (_) => const DonorDataScreen());
+
+      case certificateGeneration:
+        return MaterialPageRoute(
+          builder: (_) => const CertificateGenerationScreen(),
+        );
+
+      case volunteerProfile:
+        return MaterialPageRoute(
+          builder: (_) => const VolunteerProfileScreen(),
+        );
+
+      case volunteerSettings:
+        return MaterialPageRoute(builder: (_) => const HelpSupportScreen());
+
+      case helpSupport:
+        return MaterialPageRoute(builder: (_) => const HelpSupportScreen());
 
       default:
         return MaterialPageRoute(builder: (_) => const UnknownScreen());

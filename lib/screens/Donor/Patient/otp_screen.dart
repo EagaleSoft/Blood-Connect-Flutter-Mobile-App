@@ -191,8 +191,8 @@
 // }
 
 import 'package:flutter/material.dart';
-import '../constants.dart';
-import '../routes.dart'; // Path bilkul theek hai
+import '../../../constants.dart';
+import '../../../routes.dart'; // Path bilkul theek hai
 
 class OtpScreen extends StatefulWidget {
   final String phoneNumber;

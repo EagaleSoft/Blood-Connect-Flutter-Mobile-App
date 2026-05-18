@@ -1,6 +1,6 @@
 // lib/screens/Ambulance_screen.dart
 import 'package:flutter/material.dart';
-import '../constants.dart'; // Apki constants file
+import '../../../constants.dart'; // Apki constants file
 
 class AmbulanceScreen extends StatelessWidget {
   static const String routeName = '/ambulance';

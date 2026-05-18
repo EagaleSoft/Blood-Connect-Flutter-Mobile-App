@@ -1,6 +1,6 @@
 // lib/screens/profile_tab.dart
 import 'package:flutter/material.dart';
-import '../constants.dart';
+import '../../../constants.dart';
 
 class ProfileTabContent extends StatelessWidget {
   const ProfileTabContent({super.key});

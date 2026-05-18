@@ -500,8 +500,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:country_code_picker/country_code_picker.dart';
-import '../constants.dart';
-import '../routes.dart';
+import '../../../constants.dart';
+import '../../../routes.dart';
 
 class PhoneLoginPage extends StatefulWidget {
   final String role;
