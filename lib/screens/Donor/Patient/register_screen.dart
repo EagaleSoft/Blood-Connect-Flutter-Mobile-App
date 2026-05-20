@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
-import '../../../routes.dart'; // <--- Ye import zaroori hai navigation ke liye
+// import '../../../routes.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -60,8 +60,7 @@ class RegisterScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  // Register hone ke baad direct Home par bhejne ke liye
-                  AppRoutes.replaceWithHome(context);
+                  Navigator.pushReplacementNamed(context, '/home');
                 },
                 child: const Text(
                   "REGISTER",
