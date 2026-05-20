@@ -14,7 +14,7 @@ class BloodBankScreen extends StatelessWidget {
       "phone": "04211122233",
     },
     {
-      "name": "Pakistan Red Crescent Blood Center",
+      "name": "Pakistan Red Crescent Blood Bank",
       "location": "Karachi (Clifton)",
       "phone": "02111144455",
     },
