@@ -64,11 +64,6 @@ class AppRoutes {
           builder: (_) => OtpScreen(phoneNumber: phoneNumber),
         );
 
-      case volunteerDashboard:
-        return MaterialPageRoute(
-          builder: (_) => const VolunteerDashboardScreen(),
-        );
-
       case bloodRequestManagement:
         return MaterialPageRoute(
           builder: (_) => const BloodRequestManagementScreen(),
